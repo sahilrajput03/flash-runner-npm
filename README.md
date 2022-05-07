@@ -16,6 +16,7 @@ require('flash')
 **To see it in action, do**
 
 ```bash
+mkdir mongoosejs-with-hot-flash; cd mongoosejs-with-hot-flash
 degit sahilrajput03/learning-monogo-and-mongoosejs/mongoosejs-with-hot-flash
 npm i
 npm start
