@@ -1,5 +1,10 @@
 # Readme
 
+
+**Todo**:
+
+- Implement `test.skip` functionality like jest.
+
 Initialize this testing library to be used by other project via local link by
 
 ```bash
