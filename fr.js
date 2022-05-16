@@ -14,7 +14,11 @@ process.argv.shift()
 process.argv.shift()
 let watching = process.argv.includes('-w') || process.argv.includes('--watch')
 if (watching) {
-	process.argv = process.argv.filter((arg) => !arg.includes('-w') || !arg.includes('--watch'))
+	console.log('here..')
+	process.argv = process.argv.filter((arg) => !arg.includes('-w'))
+	process.argv = process.argv.filter((arg) => !arg.includes('--watch'))
+	// ^^ these two are not redundant ~ Sahil.
+	console.log('here.. argv', process.argv)
 }
 
 let codeFile = process.argv[0] // should be code.js
@@ -58,6 +62,6 @@ if (watching) {
 	try {
 		execSync(`node ${startTesting} ${codeFile}`, options).toString()
 	} catch (error) {
-		console.log('Oops, failed to start testing.. ~ Sahil')
+		console.log('\nBye!! ~ Flash Runner')
 	}
 }
