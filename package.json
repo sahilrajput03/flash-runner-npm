@@ -1,5 +1,5 @@
 {
-	"name": "flash-test",
+	"name": "flash-runner",
 	"version": "0.0.2",
 	"bin": {
 		"fr": "./fr.js"
