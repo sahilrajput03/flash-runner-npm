@@ -1,5 +1,12 @@
 # Readme
 
+## Usage
+
+```bash
+fr code.js
+fr -w code.js
+# -w is alias for --watch
+```
 
 **Todo**:
 

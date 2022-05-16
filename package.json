@@ -1,12 +1,22 @@
 {
-  "name": "flash",
-  "version": "1.0.0",
-  "description": "",
-  "main": "_setup_test_globals.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+	"name": "flash",
+	"version": "1.0.0",
+	"bin": {
+		"fr": "./fr.js"
+	},
+	"description": "",
+	"main": "_setup_test_globals.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"nodemon": "^2.0.16"
+	},
+	"dependencies": {
+		"dotenv": "^16.0.1",
+		"hot-module-replacement": "^3.0.4"
+	}
 }
