@@ -32,7 +32,7 @@ if (!codeFile) {
 
 if (watching) {
 	nodemon({
-		exec: `node ${startTesting} ${codeFile} -w`, // here -w is for consumption for startTesting.js file.
+		exec: `node ${startTesting} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
 		// exec: `node ${startTesting} ${filename} -w`, // here -w is for consumption for startTesting.js file.
 		watch: [startTesting], // only watch for changes in filename only and thus persisting connection.
 
