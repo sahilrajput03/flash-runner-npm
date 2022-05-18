@@ -44,6 +44,8 @@ global.connectToDb = async (cb) => {
 }
 
 let filename = process.argv[2]
+// console.log({filename})
+// process.exit(0)
 if (!filename) {
 	console.log('Please provide file as argument...')
 	process.exit(0)

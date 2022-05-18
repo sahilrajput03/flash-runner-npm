@@ -1,5 +1,11 @@
 # Readme
 
+Learn connectToDb is a necessary function i.e., if you only want to use the test runner on some tests that doesn't have any db connections needed you would need to use below `connectToDb` function:
+
+```bash
+connectToDb(async () => {})
+```
+
 ## Usage
 
 ```bash
