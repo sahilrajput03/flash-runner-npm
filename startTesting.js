@@ -1,4 +1,3 @@
-require('dotenv').config()
 // require('./_setup_test_globals.js')
 // require('flash') // I linked to this local _setup_test_globas.js file using `npm link`, so you might need to run `npm link flash` in this project once to make it work with npm.
 require('./_setup_test_globals')
