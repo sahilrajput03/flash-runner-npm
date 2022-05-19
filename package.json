@@ -8,7 +8,8 @@
 	"main": "_setup_test_globals.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"roll": "git add . && git commit -m 'update'; npm version patch && npm publish && git push"
+		"roll": "git add . && git commit -m 'update'; npm version patch && npm publish && git push",
+		"tag": "npm version patch "
 	},
 	"repository": {
 		"type": "git",
