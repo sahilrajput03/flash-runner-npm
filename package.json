@@ -15,7 +15,7 @@
 		"type": "git",
 		"url": "https://github.com/sahilrajput03/flash-runner-npm.git"
 	},
-	"keywords": [],
+	"keywords": ["test runner", "test databases flying"],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
