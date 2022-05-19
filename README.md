@@ -34,10 +34,18 @@ Sample test:
 // file: test1.js
 const {expect} = require('expect')
 
+// necessary for now
 connectToDb(async () => {})
 
+const sum = (a, b) => {
+	return a + b
+}
+
 test('one equals one', async () => {
-	expect(1).toBe(1)
+	const received = sum(1, 2)
+	const expected = 3
+
+	expect(received).toBe(expected)
 })
 ```
 
