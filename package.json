@@ -1,6 +1,6 @@
 {
 	"name": "flash-runner",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"bin": {
 		"fr": "./fr.js"
 	},
@@ -16,7 +16,9 @@
 		"url": "https://github.com/sahilrajput03/flash-runner-npm.git"
 	},
 	"keywords": [
-		"test runner", "test databases flying", "testing javascript"
+		"test runner",
+		"test databases flying",
+		"testing javascript"
 	],
 	"author": "",
 	"license": "ISC",
