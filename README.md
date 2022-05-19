@@ -19,12 +19,10 @@ connectToDb(async () => {})
 npm i flash-runner
 
 # In package.json you can add scripts,
-
 "scripts": {
 	"test": "fr test1.test.js",
 	"test:watch": "fr -w test1.test.js"
 },
-
 # -w is alias for --watch
 ```
 
