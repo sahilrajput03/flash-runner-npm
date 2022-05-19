@@ -41,7 +41,7 @@ const sum = (a, b) => {
 	return a + b
 }
 
-test('one equals one', async () => {
+test('sum function', async () => {
 	const received = sum(1, 2)
 	const expected = 3
 
