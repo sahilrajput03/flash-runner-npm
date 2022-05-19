@@ -1,4 +1,5 @@
 name: Publish Package to npmjs
+# src: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 on:
   push:
 
@@ -13,7 +14,10 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       # I am too lazy to do anything special to push to npm.
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
       - run: npm version patch
+
       - run: npm ci
       - run: npm publish
         env:
