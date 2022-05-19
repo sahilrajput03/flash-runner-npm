@@ -18,6 +18,11 @@ jobs:
       - run: git config --global user.name "Your Name"
       - run: npm version patch
 
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v9.0.0
+        with:
+          message: New patch version released!
+
       - run: npm ci
       - run: npm publish
         env:
