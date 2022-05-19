@@ -49,6 +49,6 @@ test('sum function', async () => {
 
 and you can run above test in watch mode via: `fr -w test1.js` or just run it once via: `fr test1.js`.
 
-**Todo**:
+**Todo:**
 
 - Implement `test.skip` functionality like jest.
