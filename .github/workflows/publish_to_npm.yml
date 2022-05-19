@@ -21,7 +21,9 @@ jobs:
 
         # src: 
       - name: Push
-        run: git remote set-url --push origin https://sahilrajput03:$GITHUB_TOKEN@github.com/sahilrajput03/flash-runner-npm
+        run: |
+          git remote set-url --push origin https://sahilrajput03:$GITHUB_TOKEN@github.com/sahilrajput03/flash-runner-npm
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
