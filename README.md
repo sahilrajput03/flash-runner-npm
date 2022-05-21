@@ -1,18 +1,5 @@
 # Readme
 
-**Implementation (with hot):**
-
-- testing-hot-flash-express-sequelize -> [fso-part13](https://github.com/sahilrajput03/learning_sql/tree/main/fso-part13/exercise-13.4-blogs)
-- [testing-hot-flash-express-mongo](https://github.com/sahilrajput03/learn-express/tree/main/testing-hot-flash-express-mongo)
-- [Sequelize-with-hot-flash](https://github.com/sahilrajput03/learning_sql/tree/main/sequealize-with-hot-flash)
-- [mongoosejs-with-hot-flash](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongoosejs-with-hot-flash)
-
-Learn connectToDb is a necessary function i.e., if you only want to use the test runner on some tests that doesn't have any db connections needed you would need to use below `connectToDb` function:
-
-```bash
-connectToDb(async () => {})
-```
-
 ## Usage
 
 ```bash
@@ -59,6 +46,18 @@ expect({name: 'roy', age: 10}).toMatchObject({name: 'roy'})
 expect([1,21,31]).toContain(1, 21)
 ```
 
+**Implementation (with hot):**
+
+- testing-hot-flash-express-sequelize -> [fso-part13](https://github.com/sahilrajput03/learning_sql/tree/main/fso-part13/exercise-13.4-blogs)
+- [testing-hot-flash-express-mongo](https://github.com/sahilrajput03/learn-express/tree/main/testing-hot-flash-express-mongo)
+- [Sequelize-with-hot-flash](https://github.com/sahilrajput03/learning_sql/tree/main/sequealize-with-hot-flash)
+- [mongoosejs-with-hot-flash](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongoosejs-with-hot-flash)
+
+Learn connectToDb is a necessary function i.e., if you only want to use the test runner on some tests that doesn't have any db connections needed you would need to use below `connectToDb` function:
+
+```bash
+connectToDb(async () => {})
+```
 
 ## Todo
 
