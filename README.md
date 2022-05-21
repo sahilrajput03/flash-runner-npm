@@ -13,6 +13,16 @@ Learn connectToDb is a necessary function i.e., if you only want to use the test
 connectToDb(async () => {})
 ```
 
+## Commonly used assertions
+
+```bash
+// All below expectation will be PASSED
+expect(10).toBe(10)
+expect({name: 'dan', age: '22'}).toHaveProperty('name')
+expect({name: 'roy', age: 10}).toMatchObject({name: 'roy'})
+expect([1,21,31]).toContain(1, 21)
+```
+
 ## Usage
 
 ```bash
