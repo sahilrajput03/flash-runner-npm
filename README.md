@@ -13,16 +13,6 @@ Learn connectToDb is a necessary function i.e., if you only want to use the test
 connectToDb(async () => {})
 ```
 
-## Commonly used assertions
-
-```bash
-// All below expectation will be PASSED
-expect(10).toBe(10)
-expect({name: 'dan', age: '22'}).toHaveProperty('name')
-expect({name: 'roy', age: 10}).toMatchObject({name: 'roy'})
-expect([1,21,31]).toContain(1, 21)
-```
-
 ## Usage
 
 ```bash
@@ -59,6 +49,17 @@ test('sum function', async () => {
 
 and you can run above test in watch mode via: `fr -w test1.js` or just run it once via: `fr test1.js`.
 
-**Todo:**
+## Commonly used assertions
+
+```bash
+// All below expectation will be PASSED
+expect(10).toBe(10)
+expect({name: 'dan', age: '22'}).toHaveProperty('name')
+expect({name: 'roy', age: 10}).toMatchObject({name: 'roy'})
+expect([1,21,31]).toContain(1, 21)
+```
+
+
+## Todo
 
 - Implement `test.skip` functionality like jest.
