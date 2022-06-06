@@ -48,6 +48,7 @@ expect([1,21,31]).toContain(1, 21)
 
 **Implementation (with hot):**
 
+- redis db_testing: https://github.com/sahilrajput03/LearningRedis
 - testing-hot-flash-express-sequelize -> [fso-part13](https://github.com/sahilrajput03/learning_sql/tree/main/fso-part13/exercise-13.4-blogs)
 - [testing-hot-flash-express-mongo](https://github.com/sahilrajput03/learn-express/tree/main/testing-hot-flash-express-mongo)
 - [Sequelize-with-hot-flash](https://github.com/sahilrajput03/learning_sql/tree/main/sequealize-with-hot-flash)
