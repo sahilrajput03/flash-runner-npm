@@ -50,9 +50,11 @@ if (extendedWatchFilePaths) {
 	watch.push(...config.refresh)
 }
 
+// FYI: LEARN: In below code we can use `--inspect-brk` to debug with node to break on the very first line of code too.
+// USING --inspect makes the autoattach works so smoothly, yikes! ~ sahil
 if (watching) {
 	nodemon({
-		exec: `node ${startTesting} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
+		exec: `node --inspect ${startTesting} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
 		// exec: `node ${startTesting} ${filename} -w`, // here -w is for consumption for startTesting.js file.
 		watch,
 
