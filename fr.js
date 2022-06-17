@@ -15,11 +15,11 @@ process.argv.shift()
 process.argv.shift()
 let watching = process.argv.includes('-w') || process.argv.includes('--watch')
 if (watching) {
-	console.log('here..')
+	// console.log('here..')
 	process.argv = process.argv.filter((arg) => !arg.includes('-w'))
 	process.argv = process.argv.filter((arg) => !arg.includes('--watch'))
 	// ^^ these two are not redundant ~ Sahil.
-	console.log('here.. argv', process.argv)
+	// console.log('here.. argv', process.argv)
 }
 
 let codeFile = process.argv[0] // should be test1.test.js / code.js
@@ -44,17 +44,26 @@ try {
 // only watch for changes in filename only and thus persisting connection.
 let watch = [startTesting]
 
+let config
 if (extendedWatchFilePaths) {
 	// Conditionally add other files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
-	const config = JSON.parse(extendedWatchFilePaths)
+	config = JSON.parse(extendedWatchFilePaths)
 	watch.push(...config.refresh)
+}
+
+const {debug} = config
+const isValidDebugValue = typeof debug === 'undefined' || debug === '' || debug === '--inspect' || debug === '--inspect-brk'
+if (!isValidDebugValue) {
+	const messg = "???  ~Sahil ::ERROR::FLASH RUNNER::In `config.fr.json` file you must set value of `debug` key to one of the following: '', '--inspect', '--inspect-brk'"
+	throw messg
 }
 
 // FYI: LEARN: In below code we can use `--inspect-brk` to debug with node to break on the very first line of code too.
 // USING --inspect makes the autoattach works so smoothly, yikes! ~ sahil
+// config.debug can be --inspect or --inspect-brk
 if (watching) {
 	nodemon({
-		exec: `node --inspect ${startTesting} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
+		exec: `node ${config.debug} ${startTesting} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
 		// exec: `node ${startTesting} ${filename} -w`, // here -w is for consumption for startTesting.js file.
 		watch,
 
