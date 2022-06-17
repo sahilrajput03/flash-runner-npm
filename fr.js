@@ -3,6 +3,7 @@ let nodemon = require('nodemon')
 let path = require('path')
 
 let startTesting = path.join(__dirname, 'startTesting.js')
+let log = console.log
 
 // Debug startTesting filepath.
 // throw startTesting
@@ -21,7 +22,7 @@ if (watching) {
 	console.log('here.. argv', process.argv)
 }
 
-let codeFile = process.argv[0] // should be code.js
+let codeFile = process.argv[0] // should be test1.test.js / code.js
 // console.log(codeFile)
 // process.exit(0)
 
@@ -30,11 +31,30 @@ if (!codeFile) {
 	process.exit(0)
 }
 
+const fs = require('fs')
+const read = (fileName) => {
+	return fs.readFileSync(fileName, 'utf8')
+}
+let extendedWatchFilePaths
+try {
+	extendedWatchFilePaths = read('config.fr.json')
+	// for sample config.fr.json file look for SAMPLE.config.fr.json file in this folder only.
+} catch (error) {}
+
+// only watch for changes in filename only and thus persisting connection.
+let watch = [startTesting]
+
+if (extendedWatchFilePaths) {
+	// Conditionally add other files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
+	const config = JSON.parse(extendedWatchFilePaths)
+	watch.push(...config.refresh)
+}
+
 if (watching) {
 	nodemon({
 		exec: `node ${startTesting} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
 		// exec: `node ${startTesting} ${filename} -w`, // here -w is for consumption for startTesting.js file.
-		watch: [startTesting], // only watch for changes in filename only and thus persisting connection.
+		watch,
 
 		// ext: 'js json',
 		// ext: '',
