@@ -34,35 +34,48 @@ if (!codeFile) {
 let configFilePath = path.join(process.cwd(), 'config.fr.js')
 // log('joined path::', configFilePath)
 let config
-try {
-	// for sample config.fr.json file look for SAMPLE.config.fr.json file in this folder only.
-	config = require(configFilePath)
-	// log({config})
-
-	// Add files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
-	watch.push(...config.refresh)
-
-	const {debug: d} = config
-	if (d) {
-		const isValidDebugValue = d === '' || d === '--inspect' || d === '--inspect-brk'
-		if (!isValidDebugValue) {
-			const messg = "???  ~Sahil ::ERROR::FLASH RUNNER::In `config.fr.json` file you must set value of `debug` key to one of the following: '', '--inspect', '--inspect-brk'"
-			throw messg
-		}
-	}
-} catch (error) {
-	log('No config file found. Using default config...')
-}
+let ALLOWED_KEYS = ['refresh', 'config']
 
 // only watch for changes in filename only and thus persisting connection.
 let watch = [startTesting]
+
+const fs = require('fs')
+if (fs.existsSync(configFilePath)) {
+	try {
+		// for sample config.fr.json file look for SAMPLE.config.fr.json file in this folder only.
+		// log({configFilePath})
+		config = require(configFilePath)
+
+		// Check for valid properties in fr.config.js file.
+		Object.keys(config).forEach((key) => {
+			if (!ALLOWED_KEYS.includes(key)) throw 'Invalid config key used: `' + key + '`. DID YOU MEAN ANY OF THESE: ' + ALLOWED_KEYS.join(', ')
+		})
+
+		// Add files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
+		watch.push(...config.refresh)
+		const {debug: d} = config
+		if (d) {
+			const isValidDebugValue = d === '' || d === '--inspect' || d === '--inspect-brk'
+			if (!isValidDebugValue) {
+				const messg = "???  ~Sahil ::ERROR::FLASH RUNNER::In `config.fr.json` file you must set value of `debug` key to one of the following: '', '--inspect', '--inspect-brk'"
+				throw messg
+			}
+		}
+	} catch (error) {
+		log('::::::::FAILED TO LOAD config.fr.js file!!::::::::: v')
+		log({error})
+		log('::::::::FAILED TO LOAD config.fr.js file!!::::::::: ^')
+	}
+} else {
+	log('No config file found. Using default config...')
+}
 
 // FYI: LEARN: In below code we can use `--inspect-brk` to debug with node to break on the very first line of code too.
 // USING --inspect makes the autoattach works so smoothly, yikes! ~ sahil
 // config.debug can be --inspect or --inspect-brk
 if (watching) {
 	nodemon({
-		exec: `node ${config.debug} ${startTesting} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
+		exec: `node ${config ? config.debug : ''} ${startTesting} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
 		// exec: `node ${startTesting} ${filename} -w`, // here -w is for consumption for startTesting.js file.
 		watch,
 
