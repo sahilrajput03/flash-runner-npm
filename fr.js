@@ -34,7 +34,7 @@ if (!codeFile) {
 let configFilePath = path.join(process.cwd(), 'config.fr.js')
 // log('joined path::', configFilePath)
 let config
-let ALLOWED_KEYS = ['refresh', 'config']
+let ALLOWED_KEYS = ['refresh', 'debug']
 
 // only watch for changes in filename only and thus persisting connection.
 let watch = [startTesting]
