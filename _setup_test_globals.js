@@ -10,11 +10,13 @@ test.only = (name, cb) => {
 	onlyTests.push({name, cb})
 }
 
+let testsPasssedCount = 0
 const testRunner = async ({name, cb}) => {
 	log('\n::TEST::', name)
 	try {
 		await cb()
 		log('\tTEST PASSED  ✅')
+		testsPasssedCount++
 	} catch (e) {
 		console.log('\tTEST FAILED:❌')
 		console.log(e)
@@ -33,8 +35,13 @@ const runTests = async () => {
 		}
 	}
 
+	// Stats
+	console.log('\nFinished all tests.')
+	console.log('TOTAL:', tests.length, 'Passed:', testsPasssedCount, 'Failed:', tests.length - testsPasssedCount, '\n') // Adding extra space to make it look better.
+
 	tests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
 	onlyTests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
+	testsPasssedCount = 0
 }
 
 // This doesn't work man idk why!

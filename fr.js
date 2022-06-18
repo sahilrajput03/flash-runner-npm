@@ -2,7 +2,9 @@
 let nodemon = require('nodemon')
 let path = require('path')
 
-let startTesting = path.join(__dirname, 'startTesting.js')
+let startTestingPath = path.join(__dirname, 'startTesting.js')
+let _setup_test_globalsPath = path.join(__dirname, '_setup_test_globals.js')
+
 let log = console.log
 
 // Debug startTesting filepath.
@@ -37,7 +39,7 @@ let config
 let ALLOWED_KEYS = ['refresh', 'debug']
 
 // only watch for changes in filename only and thus persisting connection.
-let watch = [startTesting]
+let watch = [startTestingPath, _setup_test_globalsPath]
 
 const fs = require('fs')
 if (fs.existsSync(configFilePath)) {
@@ -75,7 +77,7 @@ if (fs.existsSync(configFilePath)) {
 // config.debug can be --inspect or --inspect-brk
 if (watching) {
 	nodemon({
-		exec: `node ${config ? config.debug : ''} ${startTesting} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
+		exec: `node ${config ? config.debug : ''} ${startTestingPath} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
 		// exec: `node ${startTesting} ${filename} -w`, // here -w is for consumption for startTesting.js file.
 		watch,
 
@@ -103,7 +105,7 @@ if (watching) {
 	//
 
 	try {
-		execSync(`node ${startTesting} ${codeFile}`, options).toString()
+		execSync(`node ${startTestingPath} ${codeFile}`, options).toString()
 	} catch (error) {
 		console.log('\nBye!! ~ Flash Runner')
 	}
