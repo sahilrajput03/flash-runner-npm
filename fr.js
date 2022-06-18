@@ -39,7 +39,7 @@ let config
 let ALLOWED_KEYS = ['refresh', 'debug']
 
 // only watch for changes in filename only and thus persisting connection.
-let watch = [startTestingPath, _setup_test_globalsPath, configFilePath]
+let watchDefaults = [startTestingPath, _setup_test_globalsPath, configFilePath]
 
 const fs = require('fs')
 
@@ -70,8 +70,6 @@ const loadConfigFile = () => {
 				}
 			})
 
-			// Add files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
-			watch.push(...config.refresh)
 			const {debug: d} = config
 			if (d) {
 				const isValidDebugValue = d === '' || d === '--inspect' || d === '--inspect-brk'
@@ -96,6 +94,14 @@ const loadConfigFile = () => {
 const setupNodemon = () => {
 	// load configFile in `config` binding on startup.
 	loadConfigFile()
+
+	let watch
+	if (config?.refresh) {
+		watch = [...watchDefaults, ...config.refresh]
+	} else {
+		// Add files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
+		watch = watchDefaults
+	}
 
 	nodemon({
 		exec: `node ${config ? config.debug : ''} ${startTestingPath} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
