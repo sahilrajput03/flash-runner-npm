@@ -59,3 +59,6 @@ global.log = console.log
 
 global.test = test
 global.runTests = runTests
+
+// Detect if using flash runner, can be helpful to check tester dynamically in test files to run code conditionally when you may wan to run jest for production testing.
+global.isFlashRunner = true
