@@ -37,7 +37,11 @@ const runTests = async () => {
 
 	// Stats
 	console.log('\nFinished all tests.')
-	console.log('TOTAL:', tests.length, 'Passed:', testsPasssedCount, 'Failed:', tests.length - testsPasssedCount, '\n') // Adding extra space to make it look better.
+
+	let isAllPassed = tests.length === testsPasssedCount
+	let bingo_or_failed_info = isAllPassed ? 'BINGO✅✅✅' : 'Failed: ' + (tests.length - testsPasssedCount) + '❌'
+
+	console.log('TOTAL:', tests.length + ',', 'Passed:', testsPasssedCount + (isAllPassed ? ',' : '✅,'), bingo_or_failed_info, '\n') // Adding extra space to make it look better.
 
 	tests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
 	onlyTests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
