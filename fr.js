@@ -31,32 +31,31 @@ if (!codeFile) {
 	process.exit(0)
 }
 
-const fs = require('fs')
-const read = (fileName) => {
-	return fs.readFileSync(fileName, 'utf8')
-}
-let extendedWatchFilePaths
+let configFilePath = path.join(process.cwd(), 'config.fr.js')
+// log('joined path::', configFilePath)
+let config
 try {
-	extendedWatchFilePaths = read('config.fr.json')
 	// for sample config.fr.json file look for SAMPLE.config.fr.json file in this folder only.
-} catch (error) {}
+	config = require(configFilePath)
+	// log({config})
+
+	// Add files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
+	watch.push(...config.refresh)
+
+	const {debug: d} = config
+	if (d) {
+		const isValidDebugValue = d === '' || d === '--inspect' || d === '--inspect-brk'
+		if (!isValidDebugValue) {
+			const messg = "???  ~Sahil ::ERROR::FLASH RUNNER::In `config.fr.json` file you must set value of `debug` key to one of the following: '', '--inspect', '--inspect-brk'"
+			throw messg
+		}
+	}
+} catch (error) {
+	log('No config file found. Using default config...')
+}
 
 // only watch for changes in filename only and thus persisting connection.
 let watch = [startTesting]
-
-let config
-if (extendedWatchFilePaths) {
-	// Conditionally add other files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
-	config = JSON.parse(extendedWatchFilePaths)
-	watch.push(...config.refresh)
-}
-
-const {debug} = config
-const isValidDebugValue = typeof debug === 'undefined' || debug === '' || debug === '--inspect' || debug === '--inspect-brk'
-if (!isValidDebugValue) {
-	const messg = "???  ~Sahil ::ERROR::FLASH RUNNER::In `config.fr.json` file you must set value of `debug` key to one of the following: '', '--inspect', '--inspect-brk'"
-	throw messg
-}
 
 // FYI: LEARN: In below code we can use `--inspect-brk` to debug with node to break on the very first line of code too.
 // USING --inspect makes the autoattach works so smoothly, yikes! ~ sahil
