@@ -1,6 +1,10 @@
 # Readme
 
-FYI: Always use `express-async-errors` while testing a express app coz it will helps directly to `flash-runner` and standalone `server` running in prevention of crashing (in case of some error thrown). This is helpful in `flash-runner` as the server doesn't crash on failure/exception thrown by one route and thus watching service keeps running as well. Yikes! `Flash-runner`+`express-async-errors` rocks!
+Test runner that caches your database connection or any of your expensive computation between tests runs.
+
+**Other notes:**
+
+- FYI: Always use `express-async-errors` while testing a express app coz it will helps directly to `flash-runner` and standalone `server` running in prevention of crashing (in case of some error thrown). This is helpful in `flash-runner` as the server doesn't crash on failure/exception thrown by one route and thus watching service keeps running as well. Yikes! `Flash-runner`+`express-async-errors` rocks!
 
 **Implementation (with hot):**
 
