@@ -70,6 +70,7 @@ const runTests = async () => {
 	tests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
 	onlyTests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
 	testsPasssedCount = 0
+	descibeSideEffectCountInTests = 0
 }
 
 // This doesn't work man idk why!
