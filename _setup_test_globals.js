@@ -1,47 +1,68 @@
+// @ts-nocheck
 console.log('---> Starting test suite <---')
 
 let tests = []
 let onlyTests = [] // facilitates to run a list of test.only tests to be run.
 
-const test = (name, cb) => {
+global.test = (name, cb) => {
 	tests.push({name, cb})
 }
-test.only = (name, cb) => {
+global.test.only = (name, cb) => {
 	onlyTests.push({name, cb})
+}
+
+let descibeSideEffectCountInTests = 0
+global.describe = (name, cb) => {
+	descibeSideEffectCountInTests = descibeSideEffectCountInTests + 2 // adding two coz we are adding two entries to tests array.
+
+	tests.push({name, isDescribe: true, isStart: true})
+	cb() // this will push the tests now
+	tests.push({name, isDescribe: true})
 }
 
 let testsPasssedCount = 0
 const testRunner = async ({name, cb}) => {
-	log('\n::TEST::', name)
+	log('\n▢ TEST -', name)
 	try {
 		await cb()
-		log('\tTEST PASSED  ✅')
+		log('✅ Test Passed ')
 		testsPasssedCount++
 	} catch (e) {
-		console.log('\tTEST FAILED:❌')
-		console.log(e)
+		log('❌ Test Failed')
+		log(e)
 	}
 }
 // FYI :: I WOULD NEED TO RUN RUNTEST MANUALLY IN THE END OF THIS FILE.
 const runTests = async () => {
+	let testsToRun = tests // by defautl run `tests`
+
 	if (onlyTests.length > 0) {
+		// Check if user is using some `only` tests, then run `onlyTests`.
 		log('----->>>USING TEST.ONLY<<<<----')
-		for await (const test of onlyTests) {
-			await testRunner(test)
-		}
-	} else {
-		for await (const test of tests) {
+		testsToRun = onlyTests
+	}
+
+	for await (const test of testsToRun) {
+		if (test.isDescribe) {
+			if (test.isStart) {
+				log('\n\n▢▢▢ Describe -', test.name + '\n' + '>'.repeat(12 + test.name.length))
+			} else {
+				log('\n▢▢▢ Describe -', test.name, '\n' + '<'.repeat(12 + test.name.length) + '\n')
+			}
+		} else {
+			// non-describe-tests
 			await testRunner(test)
 		}
 	}
 
 	// Stats
-	console.log('\nFinished all tests.')
+	log('\nFinished all tests.')
 
-	let isAllPassed = tests.length === testsPasssedCount
-	let bingo_or_failed_info = isAllPassed ? 'BINGO✅✅✅' : 'Failed: ' + (tests.length - testsPasssedCount) + '❌'
+	let TESTS_LENGTH = tests.length - descibeSideEffectCountInTests
+	let isAllPassed = TESTS_LENGTH === testsPasssedCount
+	let bingo_or_failed_info = isAllPassed ? 'BINGO✅✅✅' : 'Failed: ' + (TESTS_LENGTH - testsPasssedCount) + '❌'
 
-	console.log('TOTAL:', tests.length + ',', 'Passed:', testsPasssedCount + (isAllPassed ? ',' : '✅,'), bingo_or_failed_info, '\n') // Adding extra space to make it look better.
+	log('TOTAL:', TESTS_LENGTH + ',', 'Passed:', testsPasssedCount + (isAllPassed ? ',' : '✅,'), bingo_or_failed_info, '\n') // Adding extra space to make it look better.
 
 	tests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
 	onlyTests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
@@ -56,9 +77,6 @@ const runTests = async () => {
 // Ans. https://stackoverflow.com/a/66293366/10012446
 
 global.log = console.log
-
-global.test = test
 global.runTests = runTests
-
 // Detect if using flash runner, can be helpful to check tester dynamically in test files to run code conditionally when you may wan to run jest for production testing.
 global.isFlashRunner = true
