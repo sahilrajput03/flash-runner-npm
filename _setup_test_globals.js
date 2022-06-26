@@ -34,20 +34,23 @@ const testRunner = async ({name, cb}) => {
 }
 // FYI :: I WOULD NEED TO RUN RUNTEST MANUALLY IN THE END OF THIS FILE.
 const runTests = async () => {
-	let testsToRun = tests // by defautl run `tests`
+	let testsToRun
 
 	if (onlyTests.length > 0) {
 		// Check if user is using some `only` tests, then run `onlyTests`.
 		log('----->>>USING TEST.ONLY<<<<----')
 		testsToRun = onlyTests
+	} else {
+		// Otherwise run all tests
+		testsToRun = tests
 	}
 
 	for await (const test of testsToRun) {
 		if (test.isDescribe) {
 			if (test.isStart) {
-				log('\n\n▢▢▢ Describe -', test.name + '\n' + '>'.repeat(12 + test.name.length))
+				log('\n\n▢▢▢ Describe -', test.name + '\n' + '>'.repeat(15 + test.name.length))
 			} else {
-				log('\n▢▢▢ Describe -', test.name, '\n' + '<'.repeat(12 + test.name.length) + '\n')
+				log('\n▢▢▢ Describe -', test.name, '\n' + '<'.repeat(15 + test.name.length) + '\n')
 			}
 		} else {
 			// non-describe-tests
