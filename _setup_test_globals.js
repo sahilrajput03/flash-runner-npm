@@ -48,9 +48,10 @@ const runTests = async () => {
 	for await (const test of testsToRun) {
 		if (test.isDescribe) {
 			if (test.isStart) {
-				log('\n\n⮟ Describe -', test.name + '\n' + '_'.repeat(15 + test.name.length))
+				log('\n\n⮟ Describe -', test.name + '\n' + '='.repeat(15 + test.name.length))
 			} else {
-				log('\n⮝ Describe (ending) -', test.name + '\n' + '_'.repeat(15 + 9 + test.name.length) + '\n')
+				// log('\n⮝ Describe Ends', '\n')
+				log('\n' + '='.repeat(15))
 			}
 		} else {
 			// non-describe-tests
