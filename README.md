@@ -48,7 +48,7 @@ test('sum function', async () => {
 NOTE:  `connectToDb` is intended to make a cache of database connection as you can see the way I have used in many reference projects section. Since it is a necessary function so just write an empty function like above even in case you don't want to have a db connection either.
 
 Running tests:
-- watch mode: `npm test-watch`
+- watch mode: `npm run test-watch`
 - run it once (for ci-cd build test pipeline): `npm test`
 
 ### Reference projects that use `flash-runner`
