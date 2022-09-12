@@ -45,6 +45,14 @@ test('sum function', async () => {
 })
 ```
 
+Learn connectToDb is a necessary function i.e., if you only want to use the test runner on some tests that doesn't have any db connections needed you would need to use below `connectToDb` function:
+
+```bash
+connectToDb(async () => {})
+```
+
+and you can run above test in watch mode via: `fr -w test1.js` or just run it once (for ci-cd testing pipeline) via: `fr test1.js`.
+
 ### Reference projects that use `flash-runner`
 
 - Full Project Example: [fso-part13](https://github.com/sahilrajput03/learning_sql/tree/main/fso-part13)
@@ -52,14 +60,6 @@ test('sum function', async () => {
 - [sequelize-with-flash-runner](https://github.com/sahilrajput03/learning_sql/tree/main/sequelize-with-flash-runner)
 - [mongoosejs-with-flash-runner](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongoosejs-with-flash-runner)
 - [LearningRedis](https://github.com/sahilrajput03/LearningRedis)
-
-Learn connectToDb is a necessary function i.e., if you only want to use the test runner on some tests that doesn't have any db connections needed you would need to use below `connectToDb` function:
-
-```bash
-connectToDb(async () => {})
-```
-
-and you can run above test in watch mode via: `fr -w test1.js` or just run it once via: `fr test1.js`.
 
 ### Beginners with testing? Some commonly used assertions
 
