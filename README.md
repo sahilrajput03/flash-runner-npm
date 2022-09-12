@@ -49,7 +49,7 @@ test('sum function', async () => {
 
 - redis db_testing: https://github.com/sahilrajput03/LearningRedis
 - testing-hot-flash-express-sequelize -> [fso-part13](https://github.com/sahilrajput03/learning_sql/tree/main/fso-part13/exercise-13.4-blogs)
-- [testing-hot-flash-express-mongo](https://github.com/sahilrajput03/learn-express/tree/main/testing-hot-flash-express-mongo)
+- [express-mongo-with-flash-runner](https://github.com/sahilrajput03/learn-express/tree/main/testing-hot-flash-express-mongo)
 - [sequelize-with-flash-runner](https://github.com/sahilrajput03/learning_sql/tree/main/sequelize-with-flash-runner)
 - [mongoosejs-with-flash-runner](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongoosejs-with-flash-runner)
 
