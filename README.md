@@ -19,7 +19,7 @@ npm i flash-runner
 # Add below scripts to `package.json` and utilise those script
 "scripts": {
 	"test": "fr test1.test.js",
-	"test:watch": "fr -w test1.test.js"
+	"test-watch": "fr -w test1.test.js"
 },
 # -w is alias for --watch
 ```
@@ -45,21 +45,19 @@ test('sum function', async () => {
 })
 ```
 
+NOTE:  `connectToDb` is intended to make a cache of database connection as you can see the way I have used in many reference projects section. Since it is a necessary function so just write an empty function like above even in case you don't want to have a db connection either.
+
+**Running tests:**
+- watch mode: `npm test-watch`
+- run it once (for ci-cd build test pipeline): `npm test`
+
 ### Reference projects that use `flash-runner`
 
-- redis db_testing: https://github.com/sahilrajput03/LearningRedis
-- testing-hot-flash-express-sequelize -> [fso-part13](https://github.com/sahilrajput03/learning_sql/tree/main/fso-part13/exercise-13.4-blogs)
-- [testing-hot-flash-express-mongo](https://github.com/sahilrajput03/learn-express/tree/main/testing-hot-flash-express-mongo)
-- [Sequelize-with-hot-flash](https://github.com/sahilrajput03/learning_sql/tree/main/sequealize-with-hot-flash)
-- [mongoosejs-with-hot-flash](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongoosejs-with-hot-flash)
-
-Learn connectToDb is a necessary function i.e., if you only want to use the test runner on some tests that doesn't have any db connections needed you would need to use below `connectToDb` function:
-
-```bash
-connectToDb(async () => {})
-```
-
-and you can run above test in watch mode via: `fr -w test1.js` or just run it once via: `fr test1.js`.
+- Full Project Example: [fso-part13](https://github.com/sahilrajput03/learning_sql/tree/main/fso-part13)
+- [express-mongo-with-flash-runner](https://github.com/sahilrajput03/learn-express/tree/main/express-mongo-with-flash-runner)
+- [sequelize-with-flash-runner](https://github.com/sahilrajput03/learning_sql/tree/main/sequelize-with-flash-runner)
+- [mongoosejs-with-flash-runner](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongoosejs-with-flash-runner)
+- [LearningRedis](https://github.com/sahilrajput03/LearningRedis)
 
 ### Beginners with testing? Some commonly used assertions
 
