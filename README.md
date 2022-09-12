@@ -19,7 +19,7 @@ npm i flash-runner
 # Add below scripts to `package.json` and utilise those script
 "scripts": {
 	"test": "fr test1.test.js",
-	"test:watch": "fr -w test1.test.js"
+	"test-watch": "fr -w test1.test.js"
 },
 # -w is alias for --watch
 ```
@@ -45,13 +45,11 @@ test('sum function', async () => {
 })
 ```
 
-Learn connectToDb is a necessary function i.e., if you only want to use the test runner on some tests that doesn't have any db connections needed you would need to use below `connectToDb` function:
+NOTE:  `connectToDb` is intended to make a cache of database connection as you can see the way I have used in many reference projects section. Since it is a necessary function so just write an empty function like above even in case you don't want to have a db connection either.
 
-```bash
-connectToDb(async () => {})
-```
-
-and you can run above test in watch mode via: `fr -w test1.js` or just run it once (for ci-cd testing pipeline) via: `fr test1.js`.
+**Running tests:**
+- watch mode: `npm test`
+- run it once (for ci-cd build test pipeline): `npm test-watch`
 
 ### Reference projects that use `flash-runner`
 
