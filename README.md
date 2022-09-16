@@ -54,6 +54,7 @@ Running tests:
 ### Reference projects that use `flash-runner`
 
 - Full Project Example: [fso-part13](https://github.com/sahilrajput03/learning_sql/tree/main/fso-part13)
+- [mongo-driver-with-flash-runner](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongo-driver-with-flash-runner)
 - [express-mongo-with-flash-runner](https://github.com/sahilrajput03/learn-express/tree/main/express-mongo-with-flash-runner)
 - [sequelize-with-flash-runner](https://github.com/sahilrajput03/learning_sql/tree/main/sequelize-with-flash-runner)
 - [mongoosejs-with-flash-runner](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongoosejs-with-flash-runner)
