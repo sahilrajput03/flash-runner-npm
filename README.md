@@ -60,6 +60,8 @@ Running tests:
 - [sequelize-with-flash-runner](https://github.com/sahilrajput03/learning_sql/tree/main/sequelize-with-flash-runner)
 - [mongoosejs-with-flash-runner](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongoosejs-with-flash-runner)
 - [LearningRedis](https://github.com/sahilrajput03/LearningRedis)
+- [TODO-nextjs-api-testing-mongo-with-connetion-restoration-with-flash](#)
+- [TODO-typescript-nextjs-api-testing-with-flash](#)
 
 ### Beginners with testing? Some commonly used assertions
 
