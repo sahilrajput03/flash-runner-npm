@@ -30,7 +30,7 @@ if (process.argv[0] === 'gen' || process.argv[0] === 'generate') {
 			path.join('config.fr.js'),
 			fs.constants.COPYFILE_EXCL
 		)
-		console.log("Config file generated SUCCESSFULLY.");
+		console.log('Config file generated SUCCESSFULLY.')
 	} catch (error) {
 		if (error.message.includes('already exists')) {
 			console.log('STATUS: config.fr.js already exists. Please delete it first to generate new config file.')
@@ -158,7 +158,7 @@ function setupNodemon() {
 			console.log('App has started')
 		})
 		.on('quit', function () {
-			log('Completed reset on nodemon child process!') //? #101_FEAT: I handle the reloading of config file and then restarting the nodemon on `quit` event handler.
+			// log('\nCompleted reset on nodemon child process!') //? #101_FEAT: I handle the reloading of config file and then restarting the nodemon on `quit` event handler.
 
 			// Check if nodemon child process is running
 			// log({run: nodemon.config.run})
@@ -175,9 +175,18 @@ function setupNodemon() {
 			//? Live loading of config file starts here!
 			// @ts-ignore
 			const wasConfigFile = files.findIndex((fl) => fl.includes('config.fr.js')) > -1
-			console.log('yo??', wasConfigFile)
+			console.log('wasConfigFile?', wasConfigFile)
 			if (wasConfigFile) {
 				nodemon.emit('quit') //? #101_FEAT: I handle the reloading of config file and then restarting the nodemon on `quit` event handler.
 			}
 		})
 }
+
+// BELOW message looks good but
+process.on('SIGINT', function () {
+	const m = '\nNote - You can use `reset` command if you fail to type anything in the terminal.'
+	// console.log(m)
+	// Print in cyan color: https://stackoverflow.com/a/41407246
+	console.log('\x1b[36m%s\x1b[0m', m) //cyan
+	process.exit(0)
+})
