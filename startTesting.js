@@ -62,7 +62,7 @@ let filepath = require('path').join(process.cwd(), filename)
 // require('./code.js')
 require(filepath)
 
-// Run tests even when `connectToDb` fn is not called in our test file 26 Sep, 2022.
+// Run tests directly when `connectToDb` fn is not called in our test file 26 Sep, 2022.
 // THIS IS USEFUL WHEN WE DON"T WANT TO CALL `connectToDb` coz lets say we don't have connection to db yet.
 if (!connectToDbCalled) {
 	runTests()
