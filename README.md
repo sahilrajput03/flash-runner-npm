@@ -31,7 +31,7 @@ npm i flash-runner
 const {expect} = require('expect')
 
 // necessary for now
-connectToDb(async () => {})
+connectToDb()
 
 const sum = (a, b) => {
 	return a + b

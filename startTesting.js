@@ -21,9 +21,11 @@ global.closeDb = (cb) => {
 	closeDbFn = cb
 }
 
+const emptyFn = () => {}
+
 let connected = false
 global.persistConnection = null
-global.connectToDb = async (cb) => {
+global.connectToDb = async (cb = emptyFn) => {
 	if (connected) return
 
 	await cb()
