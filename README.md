@@ -2,7 +2,7 @@
 
 Test runner that caches your database connection or any of your expensive computation between tests runs.
 
-Since you can use jest's expect library, i.e, [expect](https://www.npmjs.com/package/expect). The tests remains same and should work with a little change of `connectToDb` function fix for the database connection.
+Since you can use jest's expect library, i.e, [expect](https://www.npmjs.com/package/expect). The tests remains same and should work with the change of `connectToDb` function to fix the database connection.
 
 ## Motivation
 
@@ -30,8 +30,8 @@ npm i flash-runner
 // file: test1.test.js
 const {expect} = require('expect')
 
-// necessary for now
-connectToDb()
+// Connect to db if you want
+// connectToDb(async () => { })
 
 const sum = (a, b) => {
 	return a + b
@@ -45,9 +45,10 @@ test('sum function', async () => {
 })
 ```
 
-NOTE:  `connectToDb` is intended to make a cache of database connection as you can see the way I have used in many reference projects section. Since it is a necessary function so just write an empty function like above even in case you don't want to have a db connection either.
+NOTE: `connectToDb` is intended to make a cache of database connection as you can see the way I have used in many reference projects section.
 
 Running tests:
+
 - watch mode: `npm run test-watch`
 - run it once (for ci-cd build test pipeline): `npm test`
 
@@ -70,7 +71,7 @@ Running tests:
 expect(10).toBe(10)
 expect({name: 'dan', age: '22'}).toHaveProperty('name')
 expect({name: 'roy', age: 10}).toMatchObject({name: 'roy'})
-expect([1,21,31]).toContain(1, 21)
+expect([1, 21, 31]).toContain(1, 21)
 ```
 
 ## Other notes:
