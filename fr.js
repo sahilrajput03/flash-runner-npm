@@ -75,7 +75,7 @@ const loadConfigFile = () => {
 				const isValidDebugValue = d === '' || d === '--inspect' || d === '--inspect-brk'
 				if (!isValidDebugValue) {
 					const messg =
-						"???  ~Sahil ::ERROR::FLASH RUNNER::In `config.fr.json` file you must set value of `debug` key to one of the following: '', '--inspect', '--inspect-brk'"
+						"???  ~Sahil ::ERROR::FLASH RUNNER::In `config.fr.js` file you must set value of `debug` key to one of the following: '', '--inspect', '--inspect-brk'"
 					throw messg
 				}
 			}
@@ -114,12 +114,10 @@ function setupNodemon() {
 	// load configFile in `config` binding on startup.
 	loadConfigFile()
 
-	let watch
+	// Add files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
+	const watch = watchDefaults
 	if (config?.refresh) {
-		watch = [...watchDefaults, ...config.refresh]
-	} else {
-		// Add files to force reload the server using nodemon on those files changes and thus the sideeffects will be fully reloaded. Yikes!
-		watch = watchDefaults
+		watch.push(...config.refresh)
 	}
 
 	nodemon({
@@ -135,7 +133,7 @@ function setupNodemon() {
 			console.log('App has started')
 		})
 		.on('quit', function () {
-			log('Completed reset on nodemon child process!')
+			log('Completed reset on nodemon child process!') //? #101_FEAT: I handle the reloading of config file and then restarting the nodemon on `quit` event handler.
 
 			// Check if nodemon child process is running
 			// log({run: nodemon.config.run})
@@ -154,7 +152,7 @@ function setupNodemon() {
 			const wasConfigFile = files.findIndex((fl) => fl.includes('config.fr.js')) > -1
 			console.log('yo??', wasConfigFile)
 			if (wasConfigFile) {
-				nodemon.emit('quit') //? I handle the reloading of config file and then restarting the nodemon on `quit` event handler.
+				nodemon.emit('quit') //? #101_FEAT: I handle the reloading of config file and then restarting the nodemon on `quit` event handler.
 			}
 		})
 }
