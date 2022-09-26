@@ -1,6 +1,6 @@
 {
 	"name": "flash-runner",
-	"version": "0.0.44",
+	"version": "0.0.45",
 	"bin": {
 		"fr": "./src/fr.js"
 	},
