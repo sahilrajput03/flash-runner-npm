@@ -34,7 +34,6 @@ npm i flash-runner
 
 ```js
 // file: test1.test.js
-// file: test1.test.js
 const {expect} = require('expect')
 const {test} = global
 
