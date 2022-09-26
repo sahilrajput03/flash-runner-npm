@@ -2,7 +2,7 @@
 	"name": "flash-runner",
 	"version": "0.0.40",
 	"bin": {
-		"fr": "./fr.js"
+		"fr": "./src/fr.js"
 	},
 	"description": "",
 	"main": "_setup_test_globals.js",

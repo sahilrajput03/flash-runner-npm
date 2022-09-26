@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 let nodemon = require('nodemon')
 let path = require('path')
+const {execSync} = require('child_process')
+const fs = require('fs')
 
 let startTestingJs = path.join(__dirname, 'startTesting.js')
-let _setup_test_globalsPath = path.join(__dirname, '_setup_test_globals.js')
+let _setupGlobalsPath = path.join(__dirname, '_setupGlobals.js')
 
 let log = console.log
 
@@ -15,6 +17,33 @@ let log = console.log
 // Remove first two elements.
 process.argv.shift()
 process.argv.shift()
+
+if (process.argv[0] === 'gen' || process.argv[0] === 'generate') {
+	console.log('GENERATING config file: `config.fr.js`\n')
+
+	const parentDirectory = __dirname.slice(0, __dirname.lastIndexOf('/'))
+	// @ts-ignore
+	// read abour fs.copyFile @ https://www.geeksforgeeks.org/node-js-fs-copyfile-function/
+	try {
+		fs.copyFileSync(
+			path.join(parentDirectory, 'GENERATE.config.fr.js'),
+			path.join('config.fr.js'),
+			fs.constants.COPYFILE_EXCL
+		)
+		console.log("Config file generated SUCCESSFULLY.");
+	} catch (error) {
+		if (error.message.includes('already exists')) {
+			console.log('STATUS: config.fr.js already exists. Please delete it first to generate new config file.')
+		} else {
+			console.log(
+				'UNUSUAL ERROR, please report it here: https://github.com/sahilrajput03/flash-runner-npm/issues/new \n\n',
+				error
+			)
+		}
+	}
+	process.exit(0) // Exit the program after generating the config file
+}
+
 let isWatching = process.argv.includes('-w') || process.argv.includes('--watch')
 if (isWatching) {
 	// console.log('here..')
@@ -39,9 +68,7 @@ let config
 let ALLOWED_KEYS = ['refresh', 'debug']
 
 // only watch for changes in filename only and thus persisting connection.
-let watchDefaults = [startTestingJs, _setup_test_globalsPath, configFilePath]
-
-const fs = require('fs')
+let watchDefaults = [startTestingJs, _setupGlobalsPath, configFilePath]
 
 const loadConfigFile = () => {
 	if (fs.existsSync(configFilePath)) {
@@ -93,9 +120,7 @@ const loadConfigFile = () => {
 if (isWatching) {
 	setupNodemon()
 } else {
-	const {execSync} = require('child_process')
-
-	// `options` src: https://stackoverflow.com/a/31104898/10012446
+	// Learn: `options` src: https://stackoverflow.com/a/31104898/10012446
 	const options = {stdio: 'inherit'}
 	// TODO: Add about ^^ this flag in new snips in nodejs snips, yikes!!!??
 

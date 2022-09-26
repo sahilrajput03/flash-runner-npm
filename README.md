@@ -8,6 +8,12 @@ Since you can use jest's expect library, i.e, [expect](https://www.npmjs.com/pac
 
 Jest's test runner has no capability to share values and module between tests suites in watch mode. Issue [closed here](https://github.com/facebook/jest/issues/6800). But it seems that work is going on this [issue here](https://github.com/facebook/jest/issues/7184).
 
+## Features
+
+- Watch mode + Hot-reloading of server
+- No need to stop and restart server when you update `config.fr.js` file
+- Generate config file via: `fr gen` or `fr generate` from command line
+
 ## Usage
 
 ### Cli
@@ -81,3 +87,13 @@ expect([1, 21, 31]).toContain(1, 21)
 **Todo**
 
 - Implement `test.skip` functionality like jest.
+
+**Develop without publishing to npm**
+
+```bash
+# In this directory
+npm link
+
+# In target directory where you want to use flash-runner
+npm link flash-runner
+```
