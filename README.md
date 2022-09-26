@@ -12,7 +12,7 @@ Jest's test runner has no capability to share values and module between tests su
 
 - Watch mode + Hot-reloading of server
 - No need to stop and restart server when you update `config.fr.js` file
-- Generate config file via: `npx fr gen` or `npx fr generate` from command line
+- Generate config file via: `npx flash-runner gen` or `npx flash-runner generate` from command line
 
 ## Usage
 
