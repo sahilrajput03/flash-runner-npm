@@ -2,7 +2,7 @@
 let nodemon = require('nodemon')
 let path = require('path')
 
-let startTestingPath = path.join(__dirname, 'startTesting.js')
+let startTestingJs = path.join(__dirname, 'startTesting.js')
 let _setup_test_globalsPath = path.join(__dirname, '_setup_test_globals.js')
 
 let log = console.log
@@ -39,7 +39,7 @@ let config
 let ALLOWED_KEYS = ['refresh', 'debug']
 
 // only watch for changes in filename only and thus persisting connection.
-let watchDefaults = [startTestingPath, _setup_test_globalsPath, configFilePath]
+let watchDefaults = [startTestingJs, _setup_test_globalsPath, configFilePath]
 
 const fs = require('fs')
 
@@ -74,7 +74,8 @@ const loadConfigFile = () => {
 			if (d) {
 				const isValidDebugValue = d === '' || d === '--inspect' || d === '--inspect-brk'
 				if (!isValidDebugValue) {
-					const messg = "???  ~Sahil ::ERROR::FLASH RUNNER::In `config.fr.json` file you must set value of `debug` key to one of the following: '', '--inspect', '--inspect-brk'"
+					const messg =
+						"???  ~Sahil ::ERROR::FLASH RUNNER::In `config.fr.json` file you must set value of `debug` key to one of the following: '', '--inspect', '--inspect-brk'"
 					throw messg
 				}
 			}
@@ -88,10 +89,28 @@ const loadConfigFile = () => {
 	}
 }
 
+// MANGAGING RUNNING OF TEST FILE ON THE BASIS OF IF ITS OUR COMIPER IS **WATHCING** OR NOT
+if (isWatching) {
+	setupNodemon()
+} else {
+	const {execSync} = require('child_process')
+
+	// `options` src: https://stackoverflow.com/a/31104898/10012446
+	const options = {stdio: 'inherit'}
+	// TODO: Add about ^^ this flag in new snips in nodejs snips, yikes!!!??
+
+	try {
+		// @ts-ignore
+		execSync(`node ${startTestingJs} ${codeFile}`, options).toString()
+	} catch (error) {
+		console.log('\nBye!! ~ Flash Runner')
+	}
+}
+
 // FYI: LEARN: In below code we can use `--inspect-brk` to debug with node to break on the very first line of code too.
 // USING --inspect makes the autoattach works so smoothly, yikes! ~ sahil
 // config.debug can be --inspect or --inspect-brk
-const setupNodemon = () => {
+function setupNodemon() {
 	// load configFile in `config` binding on startup.
 	loadConfigFile()
 
@@ -104,7 +123,7 @@ const setupNodemon = () => {
 	}
 
 	nodemon({
-		exec: `node ${config ? config.debug : ''} ${startTestingPath} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
+		exec: `node ${config ? config.debug : ''} ${startTestingJs} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
 		// exec: `node ${startTesting} ${filename} -w`, // here -w is for consumption for startTesting.js file.
 		watch,
 		// ext: 'js json',
@@ -131,26 +150,11 @@ const setupNodemon = () => {
 			console.log('App restarted due to: ', files)
 
 			//? Live loading of config file starts here!
+			// @ts-ignore
 			const wasConfigFile = files.findIndex((fl) => fl.includes('config.fr.js')) > -1
 			console.log('yo??', wasConfigFile)
 			if (wasConfigFile) {
 				nodemon.emit('quit') //? I handle the reloading of config file and then restarting the nodemon on `quit` event handler.
 			}
 		})
-}
-
-if (isWatching) {
-	setupNodemon()
-} else {
-	const {execSync} = require('child_process')
-
-	// `options` src: https://stackoverflow.com/a/31104898/10012446
-	const options = {stdio: 'inherit'}
-	// TODO: Add about ^^ this flag in new snips in nodejs snips, yikes!!!??
-
-	try {
-		execSync(`node ${startTestingPath} ${codeFile}`, options).toString()
-	} catch (error) {
-		console.log('\nBye!! ~ Flash Runner')
-	}
 }
