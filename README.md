@@ -61,6 +61,7 @@ Running tests:
 
 ### Reference projects that use `flash-runner`
 
+- [nextjs-api-testing-mongoosejs-with-flash](https://github.com/sahilrajput03/nextjs-examples-testing/tree/master/testing-with-flash/with-mongodb-mongoose)
 - [api-testing-typescript-with-flash ](https://github.com/sahilrajput03/nextjs-examples-testing/tree/master/testing-with-flash/api-testing-typescript-with-flash)
 - [nextjs-api-testing-with-flash](https://github.com/sahilrajput03/nextjs-examples-testing/tree/master/testing-with-flash/api-testing-with-flash)
 - Full Project Example: [fso-part13](https://github.com/sahilrajput03/learning_sql/tree/main/fso-part13)
@@ -69,7 +70,6 @@ Running tests:
 - [sequelize-with-flash-runner](https://github.com/sahilrajput03/learning_sql/tree/main/sequelize-with-flash-runner)
 - [mongoosejs-with-flash-runner](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/tree/master/mongoosejs-with-flash-runner)
 - [LearningRedis](https://github.com/sahilrajput03/LearningRedis)
-- [TODO-nextjs-api-testing-mongo-with-connetion-restoration-with-flash](#)
 
 ### Beginners with testing? Some commonly used assertions
 
