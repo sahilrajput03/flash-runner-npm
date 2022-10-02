@@ -95,6 +95,7 @@ function clearLogs() {
 	// This is true craziness!
 
 	try {
+		console.clear() // clear logs of previous tests for all types of terminal (includes git-bash, oh yea!)
 		execSync('tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")', {stdio: 'pipe'})
 		// LEARN: Please keep this ^^ line always before the below line!
 		execSync('badCommand', {stdio: 'pipe'}) // mimic for people who don't have tmux installed should also be able to run without errors!
