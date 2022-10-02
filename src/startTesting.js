@@ -104,6 +104,7 @@ function clearLogs() {
 	try {
 		// Clear logs for window's users (for now tested for git-bash only) // https://stackoverflow.com/a/9452971/10012446
 		console.log('\033[2J')
+		// TODO: Try console.clear() again in this try/catch block for git-bash usercase to replace above non-readable solution.
 	} catch (error) {}
 }
 
