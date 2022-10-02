@@ -184,7 +184,7 @@ function setupNodemon() {
 
 // BELOW message looks good but
 process.on('SIGINT', function () {
-	const m = '\nNote - You can use `reset` command if you fail to type anything in the terminal now on.'
+	const m = '\nNote - You can use `reset` command if you fail to type anything in the terminal now.'
 	// console.log(m)
 	// Print in cyan color: https://stackoverflow.com/a/41407246
 	console.log('\x1b[36m%s\x1b[0m', m) //cyan
