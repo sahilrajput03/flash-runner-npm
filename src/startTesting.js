@@ -97,10 +97,13 @@ function clearLogs() {
 	try {
 		// Clear tmux history
 		execSync('tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")', {stdio: 'pipe'})
-		// Clear logs for window's users (for now tested for git-bash only) // https://stackoverflow.com/a/9452971/10012446
-		console.log('\033[2J');
 		// LEARN: Please keep this ^^ line always before the below line!
 		execSync('badCommand', {stdio: 'pipe'}) // mimic for people who don't have tmux installed should also be able to run without errors!
+	} catch (error) {}
+
+	try {
+		// Clear logs for window's users (for now tested for git-bash only) // https://stackoverflow.com/a/9452971/10012446
+		console.log('\033[2J')
 	} catch (error) {}
 }
 
