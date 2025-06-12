@@ -34,22 +34,22 @@ npm i flash-runner
 
 ```js
 // file: test1.test.js
-const {expect} = require('expect')
-const {test} = global
+const { expect } = require("expect");
+const { test } = global;
 
 // Connect to db if you want
 // connectToDb(async () => { })
 
 const sum = (a, b) => {
-	return a + b
-}
+  return a + b;
+};
 
-test('sum function', async () => {
-	const received = sum(1, 2)
-	const expected = 3
+test("sum function", async () => {
+  const received = sum(1, 2);
+  const expected = 3;
 
-	expect(received).toBe(expected)
-})
+  expect(received).toBe(expected);
+});
 ```
 
 NOTE: `connectToDb` is intended to make a cache of database connection as you can see the way I have used in many reference projects section.
@@ -75,10 +75,10 @@ Running tests:
 
 ```js
 // All below expectation will be PASSED
-expect(10).toBe(10)
-expect({name: 'dan', age: '22'}).toHaveProperty('name')
-expect({name: 'roy', age: 10}).toMatchObject({name: 'roy'})
-expect([1, 21, 31]).toContain(1, 21)
+expect(10).toBe(10);
+expect({ name: "dan", age: "22" }).toHaveProperty("name");
+expect({ name: "roy", age: 10 }).toMatchObject({ name: "roy" });
+expect([1, 21, 31]).toContain(1, 21);
 ```
 
 ## Other notes:
@@ -93,6 +93,7 @@ expect([1, 21, 31]).toContain(1, 21)
 
 ```bash
 # In this directory
+npm i
 npm link
 
 # In target directory where you want to use flash-runner
