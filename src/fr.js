@@ -146,7 +146,8 @@ function setupNodemon() {
 	}
 
 	nodemon({
-		exec: `node ${config ? config.debug : ''} ${startTestingJs} ${codeFile} -w || exit 0`, // here -w is for consumption for startTesting.js file.
+		// Note: The `-w` below is for consumption for startTesting.js file.
+		exec: `node ${config ? config.debug : ''} ${startTestingJs} ${codeFile} -w || exit 0`, 
 		// exec: `node ${startTesting} ${filename} -w`, // here -w is for consumption for startTesting.js file.
 		watch,
 		// ext: 'js json',
